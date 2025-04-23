@@ -1,0 +1,14 @@
+services:
+  mongodb-primary:
+    image: mongo:latest
+    container_name: mongo-primary
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: salas
+      MONGO_INITDB_ROOT_PASSWORD: salas4321
+    command: mongod --replSet rs0 --keyFile /etc/mongo-keyfile
+    ports:
+      - "27026:27017"
+    volumes:
+      - ./mongodb_data:/data/db
+      - ./mongo-keyfile:/etc/mongo-keyfile:ro
